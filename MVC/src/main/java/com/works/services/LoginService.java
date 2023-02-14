@@ -5,6 +5,7 @@ import com.works.repositories.LoginRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 @Service
@@ -13,6 +14,7 @@ public class LoginService {
 
     final LoginRepository loginRepository;
     final TinkEncDec tinkEncDec;
+    final HttpServletRequest req;
 
     // Register
     public boolean register(Login login) {
@@ -33,6 +35,7 @@ public class LoginService {
             Login lgn = optionalLogin.get();
             String pass = tinkEncDec.decrypt(lgn.getPassword());
             if ( login.getPassword().equals(pass) ) {
+                req.getSession().setAttribute("user", lgn);
                 return true;
             }
         }

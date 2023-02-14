@@ -21,7 +21,9 @@ public class LoginController {
     @PostMapping("/adminLogin")
     public String adminLogin(Login login) {
         boolean status = loginService.login(login);
-        System.out.println( "Login Status: " + status );
+        if (status){
+            return "redirect:/dashboard";
+        }
         return "login";
     }
 
