@@ -1,5 +1,6 @@
 package com.works.configs;
 
+import com.works.entities.Login;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.*;
@@ -22,7 +23,7 @@ public class FilterConfig implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         String url = req.getRequestURI();
-        String[] urls = {"/","/adminLogin","/register", "/error"};
+        String[] urls = {"/","/adminLogin","/register", "/adminRegister", "/error"};
         boolean loginStatus = true;
         if ( url.contains("/h2-console") ) {
             loginStatus = false;
@@ -37,6 +38,8 @@ public class FilterConfig implements Filter {
             if ( sessionControl ) {
                 res.sendRedirect("/");
             }else {
+                Login login = (Login) req.getSession().getAttribute("user");
+                req.setAttribute("user", login);
                 chain.doFilter(req, res);
             }
         }else {
