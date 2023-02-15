@@ -44,23 +44,21 @@
                 </thead>
                 <tbody>
 
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>red</td>
-                    <td><a href="/productDelete/1" class="btn btn-danger btn-sm">Delete</a></td>
+                <tr th:each="item : ${list.getContent()}">
+                    <th scope="row" th:text="${item.pid}" >1</th>
+                    <td th:text="${item.title}">Mark</td>
+                    <td th:text="${item.price}">Otto</td>
+                    <td th:text="${item.color}">red</td>
+                    <td><a th:href="${'/productDelete/'+ item.pid}" class="btn btn-danger btn-sm">Delete</a></td>
                 </tr>
 
                 </tbody>
             </table>
             <nav>
                 <ul class="pagination sm">
-                    <li class="page-item active" aria-current="page">
-                        <span class="page-link">1</span>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+
+                    <li th:each="item, iter : ${pages}" class="page-item"><a class="page-link" th:href="${'?pageCount='+iter.index}"  th:text="${iter.index + 1}" ></a></li>
+
                 </ul>
             </nav>
         </div>
