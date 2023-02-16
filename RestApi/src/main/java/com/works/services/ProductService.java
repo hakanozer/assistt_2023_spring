@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.apache.log4j.Logger;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -20,6 +21,7 @@ import java.util.Map;
 public class ProductService {
 
     final ProductRepository productRepository;
+    private static Logger logger = Logger.getLogger(ProductService.class);
 
     public ResponseEntity save(Product product) {
         Map<REnum, Object> hm = new LinkedHashMap<>();
@@ -27,6 +29,12 @@ public class ProductService {
             productRepository.save(product);
             hm.put(REnum.status, true);
             hm.put(REnum.result, product);
+            logger.trace( "Arg-1");
+            logger.debug("debug message");
+            logger.error("error message");
+            logger.trace("trace message");
+            logger.info("info message");
+            logger.warn("warn message");
             return new ResponseEntity(hm, HttpStatus.OK);
         }catch (Exception ex) {
             hm.put(REnum.status, false);

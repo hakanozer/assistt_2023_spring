@@ -9,12 +9,18 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Product extends Base {
+public class Info {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long pid;
+    private Long iid;
 
-    private String title;
-    private Integer price;
+    private String url;
+    private String roles;
+    private String username;
+    private String detail;
+    private String agent;
+    private Long date;
+    private String sessionID;
+
 }

@@ -39,7 +39,7 @@ public class AdminDetailService implements UserDetailsService {
                     true,
                     true,
                     true,
-                    parseRoles(admin.getRoles())
+                    parseRoles( admin.getRoles() )
             );
         }else  {
             throw new UsernameNotFoundException("Not Found");

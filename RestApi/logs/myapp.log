@@ -1,0 +1,4 @@
+2023-02-16 15:15:47 DEBUG ProductService:33 - debug message
+2023-02-16 15:15:47 ERROR ProductService:34 - error message
+2023-02-16 15:15:47 INFO  ProductService:36 - info message
+2023-02-16 15:15:47 WARN  ProductService:37 - warn message
