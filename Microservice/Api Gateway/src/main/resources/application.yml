@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: productModule
+          uri: lb://product
+          predicates:
+            - Path=/product/**
+        - id: loginModule
+          uri: lb://login
+          predicates:
+            - Path=/customer/**
+        - id: ordersModule
+          uri: lb://orders
+          predicates:
+            - Path=/orders/**
