@@ -9,6 +9,10 @@ import com.works.repositories.ProductRepository;
 import com.works.utils.REnum;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Parser;
+import org.jsoup.select.Elements;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -81,7 +85,14 @@ public class ProductService {
         try {
             String url = "https://www.tcmb.gov.tr/kurlar/today.xml";
             String stData = Jsoup.connect(url).timeout(15000).ignoreContentType(true).get().toString();
-            System.out.println(stData);
+            Document doc = Jsoup.parse(stData, Parser.xmlParser());
+            Elements elements = doc.getElementsByTag("Currency");
+            for(Element item : elements) {
+                String currencyName = item.getElementsByTag("CurrencyName").text();
+                String forexBuying = item.getElementsByTag("ForexBuying").text();
+                String forexSelling = item.getElementsByTag("ForexSelling").text();
+                System.out.println(currencyName + " " + forexBuying + " " + forexSelling);
+            }
         }catch (Exception ex) {
             System.err.println("Xml Error : " + ex);
         }
