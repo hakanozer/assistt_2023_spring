@@ -26,4 +26,25 @@ public class ProductRestController {
         return productService.list(pageCount);
     }
 
+    @GetMapping("/dummyProduct")
+    public ResponseEntity dummyProduct() {
+        return productService.dummyProduct();
+    }
+
+    @PostMapping("/dummyLogin")
+    public ResponseEntity dummyLogin() {
+        return productService.dummyJWT();
+    }
+
+    @GetMapping("/adminList")
+    public ResponseEntity adminList() {
+        return productService.adminList();
+    }
+
+    @GetMapping("/xml")
+    public void xml() {
+        productService.xml();
+    }
+
+
 }
